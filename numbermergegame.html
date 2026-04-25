@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Merge Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            margin: 20px 0;
+        }
+        #game-container {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-gap: 10px;
+            justify-content: center;
+            margin: 20px auto;
+        }
+        .tile {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #ccc;
+            color: #333;
+            border-radius: 5px;
+        }
+        .tile[data-value="2"] {
+            background-color: #e0f7fa;
+        }
+        .tile[data-value="4"] {
+            background-color: #b2ebf2;
+        }
+        .tile[data-value="8"] {
+            background-color: #80deea;
+        }
+        .tile[data-value="16"] {
+            background-color: #4dd0e1;
+        }
+        .tile[data-value="32"] {
+            background-color: #26c6da;
+        }
+        .tile[data-value="64"] {
+            background-color: #00acc1;
+        }
+        .tile[data-value="128"] {
+            background-color: #0097a7;
+        }
+        .tile[data-value="256"] {
+            background-color: #00838f;
+        }
+        .tile[data-value="512"] {
+            background-color: #006064;
+        }
+        .tile[data-value="1024"] {
+            background-color: #004d40;
+        }
+        #score {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        #restart-btn {
+            padding: 10px 20px;
+            background-color: #ff5252;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #restart-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <h1>Number Merge Game</h1>
+    <div id="score">Score: 0</div>
+    <div id="game-container"></div>
+    <button id="restart-btn" onclick="restartGame()">Restart Game</button>
+    <script>
+        const gridSize = 4; // 4x4 grid
+        let grid = [];
+        let score = 0;
+
+        const gameContainer = document.getElementById("game-container");
+        const scoreDisplay = document.getElementById("score");
+
+        // Initialize the grid
+        function initGrid() {
+            grid = Array(gridSize)
+                .fill()
+                .map(() => Array(gridSize).fill(0));
+            addRandomTile();
+            addRandomTile();
+            renderGrid();
+        }
+
+        // Add a random tile to the grid
+        function addRandomTile() {
+            const emptyTiles = [];
+            for (let row = 0; row < gridSize; row++) {
+                for (let col = 0; col < gridSize; col++) {
+                    if (grid[row][col] === 0) {
+                        emptyTiles.push({ row, col });
+                    }
+                }
+            }
+            if (emptyTiles.length > 0) {
+                const { row, col } = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
+                grid[row][col] = Math.random() > 0.1 ? 2 : 4;
+            }
+        }
+
+        // Render the grid on the screen
+        function renderGrid() {
+            gameContainer.innerHTML = "";
+            for (let row = 0; row < gridSize; row++) {
+                for (let col = 0; col < gridSize; col++) {
+                    const tile = document.createElement("div");
+                    tile.classList.add("tile");
+                    tile.dataset.value = grid[row][col];
+                    tile.textContent = grid[row][col] === 0 ? "" : grid[row][col];
+                    gameContainer.appendChild(tile);
+                }
+            }
+            scoreDisplay.textContent = `Score: ${score}`;
+        }
+
+        // Handle swipe actions
+        function swipe(direction) {
+            let moved = false;
+            if (direction === "left") {
+                for (let row = 0; row < gridSize; row++) {
+                    const newRow = merge(grid[row]);
+                    if (newRow.join("") !== grid[row].join("")) {
+                        moved = true;
+                    }
+                    grid[row] = newRow;
+                }
+            } else if (direction === "right") {
+                for (let row = 0; row < gridSize; row++) {
+                    const newRow = merge(grid[row].slice().reverse()).reverse();
+                    if (newRow.join("") !== grid[row].join("")) {
+                        moved = true;
+                    }
+                    grid[row] = newRow;
+                }
+            } else if (direction === "up") {
+                for (let col = 0; col < gridSize; col++) {
+                    const column = grid.map(row => row[col]);
+                    const newColumn = merge(column);
+                    for (let row = 0; row < gridSize; row++) {
+                        if (grid[row][col] !== newColumn[row]) {
+                            moved = true;
+                        }
+                        grid[row][col] = newColumn[row];
+                    }
+                }
+            } else if (direction === "down") {
+                for (let col = 0; col < gridSize; col++) {
+                    const column = grid.map(row => row[col]).reverse();
+                    const newColumn = merge(column).reverse();
+                    for (let row = 0; row < gridSize; row++) {
+                        if (grid[row][col] !== newColumn[gridSize - 1 - row]) {
+                            moved = true;
+                        }
+                        grid[row][col] = newColumn[gridSize - 1 - row];
+                    }
+                }
+            }
+            if (moved) {
+                addRandomTile();
+                renderGrid();
+                checkGameOver();
+            }
+        }
+
+        // Merge a row or column
+        function merge(line) {
+            const newLine = line.filter(value => value !== 0);
+            for (let i = 0; i < newLine.length - 1; i++) {
+                if (newLine[i] === newLine[i + 1]) {
+                    newLine[i] *= 2;
+                    score += newLine[i];
+                    newLine[i + 1] = 0;
+                }
+            }
+            return newLine.filter(value => value !== 0).concat(Array(gridSize - newLine.filter(value => value !== 0).length).fill(0));
+        }
+
+        // Check for game over
+        function checkGameOver() {
+            for (let row = 0; row < gridSize; row++) {
+                for (let col = 0; col < gridSize; col++) {
+                    if (grid[row][col] === 0) return;
+                    if (row > 0 && grid[row][col] === grid[row - 1][col]) return;
+                    if (col > 0 && grid[row][col] === grid[row][col - 1]) return;
+                }
+            }
+            alert("Game Over! Your score: " + score);
+        }
+
+        // Restart the game
+        function restartGame() {
+            score = 0;
+            initGrid();
+        }
+
+        // Keyboard controls
+        document.addEventListener("keydown", event => {
+            switch (event.key) {
+                case "ArrowLeft":
+                    swipe("left");
+                    break;
+                case "ArrowRight":
+                    swipe("right");
+                    break;
+                case "ArrowUp":
+                    swipe("up");
+                    break;
+                case "ArrowDown":
+                    swipe("down");
+                    break;
+            }
+        });
+
+        // Initialize the game
+        initGrid();
+    </script>
+</body>
+</html>

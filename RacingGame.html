@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            text-align: center;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298);
+            color: white;
+        }
+        h1 {
+            margin: 10px 0;
+        }
+        canvas {
+            display: block;
+            margin: 20px auto;
+            border: 3px solid white;
+            background-color: #111;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        #status {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        #restartBtn {
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: #ff5722;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: 0.3s ease-in-out;
+        }
+        #restartBtn:hover {
+            background: #ff784e;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Racing Game</h1>
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+    <div id="status">Score: 0</div>
+    <button id="restartBtn" style="display: none;">Restart Game</button>
+
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const restartBtn = document.getElementById("restartBtn");
+        const statusText = document.getElementById("status");
+
+        const roadWidth = 200;
+        const roadX = (canvas.width - roadWidth) / 2;
+        const carWidth = 30;
+        const carHeight = 60;
+        let score = 0;
+        let gameActive = true;
+
+        // Player's Car
+        const playerCar = { x: roadX + roadWidth / 2 - carWidth / 2, y: canvas.height - carHeight - 10, speed: 5 };
+
+        // Obstacles
+        const obstacles = [];
+        const obstacleSpeed = 3;
+
+        // Draw road
+        function drawRoad() {
+            ctx.fillStyle = "#555";
+            ctx.fillRect(roadX, 0, roadWidth, canvas.height);
+
+            // Draw road lines
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = 2;
+            for (let i = 0; i < canvas.height; i += 40) {
+                ctx.beginPath();
+                ctx.moveTo(roadX + roadWidth / 2, i);
+                ctx.lineTo(roadX + roadWidth / 2, i + 20);
+                ctx.stroke();
+            }
+        }
+
+        // Draw player's car
+        function drawCar(x, y) {
+            ctx.fillStyle = "#ff0000";
+            ctx.fillRect(x, y, carWidth, carHeight);
+        }
+
+        // Draw obstacles
+        function drawObstacles() {
+            obstacles.forEach(obstacle => {
+                ctx.fillStyle = "#888";
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            });
+        }
+
+        // Update obstacles
+        function updateObstacles() {
+            for (let i = 0; i < obstacles.length; i++) {
+                obstacles[i].y += obstacleSpeed;
+
+                // Remove off-screen obstacles
+                if (obstacles[i].y > canvas.height) {
+                    obstacles.splice(i, 1);
+                    score++;
+                }
+            }
+
+            // Add new obstacles
+            if (Math.random() < 0.02) {
+                const width = 50 + Math.random() * 50;
+                obstacles.push({
+                    x: roadX + Math.random() * (roadWidth - width),
+                    y: -50,
+                    width,
+                    height: 20,
+                });
+            }
+        }
+
+        // Check for collisions
+        function checkCollision() {
+            for (const obstacle of obstacles) {
+                if (
+                    playerCar.x < obstacle.x + obstacle.width &&
+                    playerCar.x + carWidth > obstacle.x &&
+                    playerCar.y < obstacle.y + obstacle.height &&
+                    playerCar.y + carHeight > obstacle.y
+                ) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Draw the game
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawRoad();
+            drawCar(playerCar.x, playerCar.y);
+            drawObstacles();
+
+            statusText.textContent = `Score: ${score}`;
+        }
+
+        // Update the game
+        function updateGame() {
+            if (!gameActive) return;
+
+            updateObstacles();
+
+            if (checkCollision()) {
+                endGame();
+                return;
+            }
+
+            draw();
+        }
+
+        // End the game
+        function endGame() {
+            gameActive = false;
+            statusText.textContent = `Game Over! Final Score: ${score}`;
+            restartBtn.style.display = "inline-block";
+        }
+
+        // Handle controls
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft" && playerCar.x > roadX) {
+                playerCar.x -= playerCar.speed;
+            }
+            if (e.key === "ArrowRight" && playerCar.x < roadX + roadWidth - carWidth) {
+                playerCar.x += playerCar.speed;
+            }
+        });
+
+        // Restart the game
+        restartBtn.addEventListener("click", () => {
+            resetGame();
+        });
+
+        function resetGame() {
+            score = 0;
+            gameActive = true;
+            obstacles.length = 0;
+            playerCar.x = roadX + roadWidth / 2 - carWidth / 2;
+            playerCar.y = canvas.height - carHeight - 10;
+            restartBtn.style.display = "none";
+            statusText.textContent = `Score: ${score}`;
+        }
+
+        // Game loop
+        setInterval(updateGame, 30);
+    </script>
+</body>
+</html>

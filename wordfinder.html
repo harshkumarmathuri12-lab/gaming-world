@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Finder Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            margin: 20px;
+        }
+        #game-board {
+            display: grid;
+            margin: 20px auto;
+            gap: 5px;
+            grid-template-columns: repeat(10, 40px);
+            width: max-content;
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #3498db;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cell.selected {
+            background-color: #2ecc71;
+        }
+        .word-list {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        .word {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 5px 10px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 5px;
+        }
+        .word.found {
+            background-color: #2ecc71;
+        }
+        .status {
+            margin: 20px;
+            font-size: 20px;
+        }
+        .restart-btn {
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .restart-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Word Finder Game</h1>
+    <div id="game-board"></div>
+    <div class="word-list" id="word-list"></div>
+    <div class="status" id="status">Find all the words!</div>
+    <button class="restart-btn" onclick="restartGame()">Restart Game</button>
+    <script>
+        const words = ['APPLE', 'BANANA', 'ORANGE', 'MANGO', 'PEAR']; // Words to find
+        const gridSize = 10; // Size of the grid
+        const gameBoard = document.getElementById('game-board');
+        const wordList = document.getElementById('word-list');
+        const statusEl = document.getElementById('status');
+        let grid = Array(gridSize).fill().map(() => Array(gridSize).fill(''));
+        let selectedCells = [];
+
+        // Place words in the grid
+        function placeWords() {
+            words.forEach(word => {
+                let placed = false;
+                while (!placed) {
+                    const direction = Math.random() > 0.5 ? 'H' : 'V';
+                    const row = Math.floor(Math.random() * gridSize);
+                    const col = Math.floor(Math.random() * gridSize);
+                    if (canPlaceWord(word, row, col, direction)) {
+                        for (let i = 0; i < word.length; i++) {
+                            if (direction === 'H') {
+                                grid[row][col + i] = word[i];
+                            } else {
+                                grid[row + i][col] = word[i];
+                            }
+                        }
+                        placed = true;
+                    }
+                }
+            });
+        }
+
+        // Check if a word can be placed at a position
+        function canPlaceWord(word, row, col, direction) {
+            if (direction === 'H' && col + word.length > gridSize) return false;
+            if (direction === 'V' && row + word.length > gridSize) return false;
+            for (let i = 0; i < word.length; i++) {
+                const cell = direction === 'H' ? grid[row][col + i] : grid[row + i][col];
+                if (cell !== '' && cell !== word[i]) return false;
+            }
+            return true;
+        }
+
+        // Fill empty cells with random letters
+        function fillGrid() {
+            for (let i = 0; i < gridSize; i++) {
+                for (let j = 0; j < gridSize; j++) {
+                    if (grid[i][j] === '') {
+                        grid[i][j] = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // Random letter A-Z
+                    }
+                }
+            }
+        }
+
+        // Create the game board
+        function createBoard() {
+            gameBoard.innerHTML = '';
+            grid.forEach((row, rowIndex) => {
+                row.forEach((letter, colIndex) => {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    cell.textContent = letter;
+                    cell.dataset.row = rowIndex;
+                    cell.dataset.col = colIndex;
+                    cell.addEventListener('click', () => handleCellClick(cell));
+                    gameBoard.appendChild(cell);
+                });
+            });
+        }
+
+        // Handle cell click
+        function handleCellClick(cell) {
+            const row = parseInt(cell.dataset.row, 10);
+            const col = parseInt(cell.dataset.col, 10);
+            cell.classList.toggle('selected');
+            const selectedIndex = selectedCells.findIndex(
+                c => c.row === row && c.col === col
+            );
+            if (selectedIndex > -1) {
+                selectedCells.splice(selectedIndex, 1);
+            } else {
+                selectedCells.push({ row, col });
+            }
+            checkSelection();
+        }
+
+        // Check if selected cells form a word
+        function checkSelection() {
+            const selectedWord = selectedCells
+                .sort((a, b) => (a.row - b.row || a.col - b.col))
+                .map(cell => grid[cell.row][cell.col])
+                .join('');
+            if (words.includes(selectedWord)) {
+                document.querySelector(`.word[data-word="${selectedWord}"]`).classList.add('found');
+                selectedCells.forEach(cell => {
+                    const cellEl = gameBoard.querySelector(
+                        `.cell[data-row="${cell.row}"][data-col="${cell.col}"]`
+                    );
+                    cellEl.classList.add('selected');
+                });
+                selectedCells = [];
+                checkWin();
+            }
+        }
+
+        // Check if the player has won
+        function checkWin() {
+            const foundWords = document.querySelectorAll('.word.found').length;
+            if (foundWords === words.length) {
+                statusEl.textContent = 'Congratulations! You found all the words! 🎉';
+            }
+        }
+
+        // Initialize the word list
+        function createWordList() {
+            wordList.innerHTML = '';
+            words.forEach(word => {
+                const wordEl = document.createElement('div');
+                wordEl.classList.add('word');
+                wordEl.dataset.word = word;
+                wordEl.textContent = word;
+                wordList.appendChild(wordEl);
+            });
+        }
+
+        // Restart the game
+        function restartGame() {
+            grid = Array(gridSize).fill().map(() => Array(gridSize).fill(''));
+            selectedCells = [];
+            placeWords();
+            fillGrid();
+            createBoard();
+            createWordList();
+            statusEl.textContent = 'Find all the words!';
+        }
+
+        // Start the game
+        function startGame() {
+            placeWords();
+            fillGrid();
+            createBoard();
+            createWordList();
+        }
+
+        startGame();
+    </script>
+</body>
+</html>

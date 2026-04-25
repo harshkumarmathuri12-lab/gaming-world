@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        #sudoku-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 50px);
+            grid-template-rows: repeat(9, 50px);
+            gap: 1px;
+            margin: 20px auto;
+            width: 452px;
+            background-color: black;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            text-align: center;
+            line-height: 50px;
+            background-color: white;
+            border: 1px solid black;
+        }
+        .cell.read-only {
+            background-color: #ddd;
+        }
+        .cell input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            text-align: center;
+            font-size: 20px;
+        }
+        .cell input:invalid {
+            color: red;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sudoku Game</h1>
+    <div id="sudoku-grid"></div>
+    <button onclick="checkSolution()">Check Solution</button>
+    <button onclick="resetGame()">Reset</button>
+
+    <script>
+        // Initial Sudoku Puzzle (0 represents empty cells)
+        const initialPuzzle = [
+            [5, 3, 0, 0, 7, 0, 0, 0, 0],
+            [6, 0, 0, 1, 9, 5, 0, 0, 0],
+            [0, 9, 8, 0, 0, 0, 0, 6, 0],
+            [8, 0, 0, 0, 6, 0, 0, 0, 3],
+            [4, 0, 0, 8, 0, 3, 0, 0, 1],
+            [7, 0, 0, 0, 2, 0, 0, 0, 6],
+            [0, 6, 0, 0, 0, 0, 2, 8, 0],
+            [0, 0, 0, 4, 1, 9, 0, 0, 5],
+            [0, 0, 0, 0, 8, 0, 0, 7, 9]
+        ];
+
+        const gridContainer = document.getElementById('sudoku-grid');
+
+        function createGrid() {
+            gridContainer.innerHTML = '';
+            initialPuzzle.forEach((row, rowIndex) => {
+                row.forEach((cell, colIndex) => {
+                    const cellDiv = document.createElement('div');
+                    cellDiv.classList.add('cell');
+                    if (cell !== 0) {
+                        cellDiv.textContent = cell;
+                        cellDiv.classList.add('read-only');
+                    } else {
+                        const input = document.createElement('input');
+                        input.type = 'number';
+                        input.min = 1;
+                        input.max = 9;
+                        input.setAttribute('data-row', rowIndex);
+                        input.setAttribute('data-col', colIndex);
+                        cellDiv.appendChild(input);
+                    }
+                    gridContainer.appendChild(cellDiv);
+                });
+            });
+        }
+
+        function checkSolution() {
+            let isCorrect = true;
+            const grid = Array.from(document.querySelectorAll('.cell input')).reduce((acc, input) => {
+                const row = input.getAttribute('data-row');
+                const col = input.getAttribute('data-col');
+                const value = parseInt(input.value) || 0;
+                if (!acc[row]) acc[row] = [];
+                acc[row][col] = value;
+                return acc;
+            }, [...initialPuzzle.map(row => [...row])]);
+
+            // Validate rows, columns, and 3x3 grids
+            const isValid = (array) => new Set(array.filter(n => n !== 0)).size === array.filter(n => n !== 0).length;
+
+            for (let i = 0; i < 9; i++) {
+                if (!isValid(grid[i]) || !isValid(grid.map(row => row[i]))) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+            for (let r = 0; r < 9; r += 3) {
+                for (let c = 0; c < 9; c += 3) {
+                    const square = [];
+                    for (let i = 0; i < 3; i++) {
+                        for (let j = 0; j < 3; j++) {
+                            square.push(grid[r + i][c + j]);
+                        }
+                    }
+                    if (!isValid(square)) {
+                        isCorrect = false;
+                        break;
+                    }
+                }
+            }
+            alert(isCorrect ? 'Congratulations! The solution is correct.' : 'The solution is incorrect.');
+        }
+
+        function resetGame() {
+            createGrid();
+        }
+
+        createGrid();
+    </script>
+</body>
+</html>

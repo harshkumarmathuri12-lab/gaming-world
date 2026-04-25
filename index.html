@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming World</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <h1>Gaming World</h1>
+    </div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#featured">Featured</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <h2>Welcome to Gaming World!</h2>
+    <p>Play awesome games instantly 🚀</p>
+</section>
+
+<section id="featured" class="games-section">
+    <h2>Featured Games</h2>
+
+    <div class="game-list">
+
+        <div class="game" onclick="openGame('SnakeGame.html')">
+            <img src="OIP.jpg">
+            <h3>Snake</h3>
+        </div>
+
+        <div class="game" onclick="openGame('sudoku.html')">
+            <img src="sudoku.jpg">
+            <h3>Sudoku</h3>
+        </div>
+
+        <div class="game" onclick="openGame('chess.html')">
+            <img src="chess.png">
+            <h3>Chess</h3>
+        </div>
+
+        <div class="game" onclick="openGame('numbermergegame.html')">
+            <img src="number merge.webp">
+            <h3>Number Merge</h3>
+        </div>
+
+        <!-- FIXED (space removed) -->
+        <div class="game" onclick="openGame('pingpong.html')">
+            <img src="ping pong.webp">
+            <h3>Ping Pong</h3>
+        </div>
+
+        <!-- Cube Minion Rush -->
+        <div class="game" onclick="openGame('Cube_Minion_Rush.html')">
+            <img src="Cube Minion Rush.jpg">
+            <h3>Cube Minion Rush</h3>
+        </div>
+
+        <!-- Ninja Toy Match -->
+        <div class="game" onclick="openGame('ninja_toy_match.html')">
+            <img src="ninja_toy_match.jpg">
+            <h3>Ninja Toy Match</h3>
+        </div>
+
+        <!-- Bike Rush Xtreme -->
+        <div class="game" onclick="openGame('Bike_Rush_Xtreme.html')">
+            <img src="Bike_Rush_Xtreme.jpg">
+            <h3>Bike Rush Xtreme</h3>
+        </div>
+
+        <div class="game" onclick="openGame('Toxic_Arena_Biological_Threat.html')">
+            <img src="Toxic Arena Biological Threat.jpg">
+            <h3>Toxic Arena: Biological Threat</h3>
+        </div>
+    </div>
+</section>
+
+<!-- 🔥 GAME POPUP -->
+<div id="game-container">
+    <div class="game-box">
+
+        <button onclick="closeGame()" class="close-btn">X</button>
+
+        <iframe 
+            id="game-frame" 
+            allowfullscreen 
+            allow="autoplay; fullscreen; gamepad; keyboard"
+        ></iframe>
+
+    </div>
+</div>
+
+<section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Message"></textarea>
+        <button type="submit">Send</button>
+    </form>
+</section>
+
+<footer>
+    <p>© 2026 Gaming World</p>
+</footer>
+
+<script src="home.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin: 20px;
+        }
+        #chess-board {
+            display: grid;
+            grid-template-columns: repeat(8, 80px);
+            grid-template-rows: repeat(8, 80px);
+            margin: 20px auto;
+            border: 2px solid #000;
+            width: 640px;
+        }
+        .cell {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            cursor: pointer;
+        }
+        .cell.black {
+            background-color: #769656;
+        }
+        .cell.white {
+            background-color: #eeeed2;
+        }
+        .highlight {
+            outline: 3px solid yellow;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chess Game</h1>
+    <div id="chess-board"></div>
+    <script>
+        const boardContainer = document.getElementById('chess-board');
+        let selectedCell = null;
+
+        // Chess board and piece symbols
+        const initialBoard = [
+            ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'],
+            ['♟', '♟', '♟', '♟', '♟', '♟', '♟', '♟'],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['♙', '♙', '♙', '♙', '♙', '♙', '♙', '♙'],
+            ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']
+        ];
+
+        // Initialize the board
+        function createBoard() {
+            boardContainer.innerHTML = '';
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell', (row + col) % 2 === 0 ? 'white' : 'black');
+                    cell.dataset.row = row;
+                    cell.dataset.col = col;
+
+                    if (initialBoard[row][col]) {
+                        cell.textContent = initialBoard[row][col];
+                    }
+
+                    cell.addEventListener('click', () => selectCell(cell));
+                    boardContainer.appendChild(cell);
+                }
+            }
+        }
+
+        // Handle cell selection and movement
+        function selectCell(cell) {
+            const row = cell.dataset.row;
+            const col = cell.dataset.col;
+
+            if (selectedCell) {
+                if (selectedCell === cell) {
+                    selectedCell.classList.remove('highlight');
+                    selectedCell = null;
+                } else {
+                    movePiece(selectedCell, cell);
+                    selectedCell.classList.remove('highlight');
+                    selectedCell = null;
+                }
+            } else if (cell.textContent) {
+                selectedCell = cell;
+                cell.classList.add('highlight');
+            }
+        }
+
+        // Move the piece from one cell to another
+        function movePiece(fromCell, toCell) {
+            const fromRow = fromCell.dataset.row;
+            const fromCol = fromCell.dataset.col;
+            const toRow = toCell.dataset.row;
+            const toCol = toCell.dataset.col;
+
+            // Example movement logic (only allows moving to an empty square)
+            if (toCell.textContent === '') {
+                toCell.textContent = fromCell.textContent;
+                fromCell.textContent = '';
+            }
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>

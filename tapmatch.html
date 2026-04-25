@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tap Match Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin: 20px;
+        }
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-gap: 10px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 10px;
+            border: 2px solid #000;
+            width: max-content;
+        }
+        .card {
+            width: 100px;
+            height: 100px;
+            background-color: #3498db;
+            color: white;
+            font-size: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .card.matched {
+            background-color: #2ecc71;
+            cursor: default;
+        }
+        .card.hidden {
+            background-color: #3498db;
+            color: transparent;
+        }
+        .status {
+            margin: 20px;
+            font-size: 20px;
+        }
+        .restart-btn {
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .restart-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tap Match Game</h1>
+    <div id="game-board"></div>
+    <div class="status" id="status">Find all the pairs!</div>
+    <button class="restart-btn" onclick="restartGame()">Restart Game</button>
+    <script>
+        const gameBoard = document.getElementById('game-board');
+        const statusEl = document.getElementById('status');
+        const icons = ['🍎', '🍌', '🍇', '🍉', '🍓', '🍒', '🍍', '🥝'];
+        let cards = [...icons, ...icons]; // Create pairs
+        let flippedCards = [];
+        let matchedCount = 0;
+
+        // Shuffle the cards
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Initialize the game
+        function createBoard() {
+            gameBoard.innerHTML = '';
+            cards = shuffle(cards);
+            flippedCards = [];
+            matchedCount = 0;
+            statusEl.textContent = 'Find all the pairs!';
+            cards.forEach((icon, index) => {
+                const card = document.createElement('div');
+                card.classList.add('card', 'hidden');
+                card.dataset.icon = icon;
+                card.dataset.index = index;
+                card.addEventListener('click', () => handleCardClick(card));
+                gameBoard.appendChild(card);
+            });
+        }
+
+        // Handle card click
+        function handleCardClick(card) {
+            if (card.classList.contains('matched') || flippedCards.length === 2) return;
+
+            card.classList.remove('hidden');
+            card.textContent = card.dataset.icon;
+
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                checkMatch();
+            }
+        }
+
+        // Check if two flipped cards match
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+
+            if (card1.dataset.icon === card2.dataset.icon) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedCount += 2;
+
+                if (matchedCount === cards.length) {
+                    statusEl.textContent = 'You found all the pairs! 🎉';
+                }
+            } else {
+                setTimeout(() => {
+                    card1.classList.add('hidden');
+                    card2.classList.add('hidden');
+                    card1.textContent = '';
+                    card2.textContent = '';
+                }, 1000);
+            }
+            flippedCards = [];
+        }
+
+        // Restart the game
+        function restartGame() {
+            createBoard();
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>
