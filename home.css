@@ -5,28 +5,54 @@ body {
     color: white;
 }
 
+/* HEADER */
 header {
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    align-items: center;
+    padding: 15px 30px;
     background: #1e1e1e;
 }
 
+/* LOGO */
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.logo span {
+    font-size: 20px;
+    font-weight: bold;
     color: #00c3ff;
 }
 
+/* NAV */
 nav a {
     margin: 0 10px;
     color: white;
     text-decoration: none;
+    font-weight: 500;
 }
 
+nav a:hover {
+    color: #00c3ff;
+}
+
+/* HERO */
 .hero {
     text-align: center;
-    padding: 60px;
+    padding: 60px 20px;
 }
 
+/* GAMES */
 .games-section {
     padding: 20px;
     text-align: center;
@@ -57,7 +83,7 @@ nav a {
     border-radius: 10px;
 }
 
-/* 🔥 POPUP FULLSCREEN FIX */
+/* POPUP */
 #game-container {
     position: fixed;
     top: 0;
@@ -94,4 +120,34 @@ nav a {
     font-size: 16px;
     cursor: pointer;
     z-index: 10000;
+}
+
+/* CONTACT */
+#contact {
+    text-align: center;
+    padding: 40px;
+}
+
+#contact input,
+#contact textarea {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+}
+
+#contact button {
+    padding: 10px 20px;
+    background: #00c3ff;
+    border: none;
+    color: black;
+    cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1e1e1e;
 }

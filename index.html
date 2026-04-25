@@ -11,8 +11,10 @@
 
 <header>
     <div class="logo">
-        <h1>Gaming World</h1>
+        <img src="logo.png" alt="logo">
+        <span>Gaming World</span>
     </div>
+
     <nav>
         <a href="#home">Home</a>
         <a href="#featured">Featured</a>
@@ -50,25 +52,21 @@
             <h3>Number Merge</h3>
         </div>
 
-        <!-- FIXED (space removed) -->
         <div class="game" onclick="openGame('pingpong.html')">
             <img src="ping pong.webp">
             <h3>Ping Pong</h3>
         </div>
 
-        <!-- Cube Minion Rush -->
         <div class="game" onclick="openGame('Cube_Minion_Rush.html')">
             <img src="Cube Minion Rush.jpg">
             <h3>Cube Minion Rush</h3>
         </div>
 
-        <!-- Ninja Toy Match -->
         <div class="game" onclick="openGame('ninja_toy_match.html')">
             <img src="ninja_toy_match.jpg">
             <h3>Ninja Toy Match</h3>
         </div>
 
-        <!-- Bike Rush Xtreme -->
         <div class="game" onclick="openGame('Bike_Rush_Xtreme.html')">
             <img src="Bike_Rush_Xtreme.jpg">
             <h3>Bike Rush Xtreme</h3>
@@ -76,23 +74,22 @@
 
         <div class="game" onclick="openGame('Toxic_Arena_Biological_Threat.html')">
             <img src="Toxic Arena Biological Threat.jpg">
-            <h3>Toxic Arena: Biological Threat</h3>
+            <h3>Toxic Arena</h3>
         </div>
+
     </div>
 </section>
 
-<!-- 🔥 GAME POPUP -->
+<!-- GAME POPUP -->
 <div id="game-container">
     <div class="game-box">
-
         <button onclick="closeGame()" class="close-btn">X</button>
 
         <iframe 
             id="game-frame" 
             allowfullscreen 
-            allow="autoplay; fullscreen; gamepad; keyboard"
-        ></iframe>
-
+            allow="autoplay; fullscreen; gamepad; keyboard">
+        </iframe>
     </div>
 </div>
 
