@@ -1,171 +1,178 @@
-const score = document.querySelector('.score'),
-  startBtn = document.querySelector('.game__start'),
-  gameArea = document.querySelector('.gamearea'),
-  car = document.createElement('div'),
-  diffBtn = document.querySelectorAll('.difficulty__button'),
-  diffSelected = document.querySelector('.difficulty-selected'),
-  screens = document.querySelectorAll('.screen'),
-  startMenu = document.querySelector('.start__menu');
+const scoreDisplay = document.querySelector(".score");
+const startScreen = document.querySelector(".start__menu");
+const gameArea = document.querySelector(".gamearea");
 
-const enemyStyles = ['enemy1', 'enemy2', 'enemy3', 'enemy4', 'enemy5'];
+let player = { speed: 5, score: 0 };
+let gameAudio = new Audio("audio/game-audio.mp3");
+gameAudio.loop = true;
 
-car.classList.add('car');
+// 🔥 DIFFICULTY
+let difficulty = "medium";
 
-document.addEventListener('keydown', startGame);
-document.addEventListener('keyup', stopGame);
+document.querySelectorAll(".difficulty__button").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".difficulty__button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
 
-const music = ['./audio/game-audio.mp3'];
-const audio = new Audio();
-audio.src = music[0];
-audio.volume = 0.1;
+        difficulty = btn.classList.contains("easy") ? "easy" :
+                     btn.classList.contains("hard") ? "hard" : "medium";
 
-const keys = {
-  ArrowDown: false,
-  ArrowUp: false,
-  ArrowLeft: false,
-  ArrowRight: false,
-};
-
-const settings = {
-  start: false,
-  score: 0,
-  speed: 5,
-  traffic: 3,
-};
-
-function getQuantityElements(heightElement) {
-  return document.documentElement.clientHeight / heightElement + 1;
-}
-
-function random(num) {
-  return Math.floor(Math.random() * num);
-}
-
-// 🔥 LANGUAGE FIX ONLY
-diffBtn.forEach(item => {
-  item.addEventListener('click', () => {
-    if (item.classList.contains('easy')) {
-      settings.speed = 3;
-      settings.traffic = 3.5;
-      diffSelected.textContent = 'Difficulty selected: Easy';
-      diffBtn.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-
-    } else if (item.classList.contains('medium')) {
-      settings.speed = 5;
-      settings.traffic = 3;
-      diffSelected.textContent = 'Difficulty selected: Medium';
-      diffBtn.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-
-    } else if (item.classList.contains('hard')) {
-      settings.speed = 7;
-      settings.traffic = 2.5;
-      diffSelected.textContent = 'Difficulty selected: Hard';
-      diffBtn.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-    }
-  });
+        document.querySelector(".difficulty-selected").innerText = "Selected: " + difficulty;
+    });
 });
 
-startBtn.addEventListener('click', () => {
-  startMenu.classList.add('hide');
-  gameArea.innerHTML = '';
-  car.style.left = '225px';
-  car.style.bottom = '75px';
-  screens[0].classList.add('screen-up');
+// 🔥 START GAME
+document.querySelector(".game__start").addEventListener("click", startGame);
 
-  for (let i = 0; i < getQuantityElements(80); i++) {
-    const line = document.createElement('div');
-    line.classList.add('line');
-    line.style.top = i * 80 + 'px';
-    line.y = i * 80;
-    gameArea.appendChild(line);
-  }
+// 🔥 AUDIO UNLOCK (important for iframe)
+document.addEventListener("click", () => {
+    gameAudio.play().catch(() => {});
+}, { once: true });
 
-  for (let i = 0; i < getQuantityElements(80 * settings.traffic); i++) {
-    const enemy = document.createElement('div');
-    enemy.classList.add('enemy');
-    enemy.y = -100 * settings.traffic * (i + 1);
-    enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px';
-    enemy.style.top = enemy.y + 'px';
-    enemy.style.background =
-      'rgba(0,0,0,0) url(./image/' +
-      enemyStyles[random(enemyStyles.length)] +
-      '.png) center / cover no-repeat';
-    gameArea.appendChild(enemy);
-  }
+function startGame() {
+    startScreen.classList.add("hide");
+    gameArea.innerHTML = "";
 
-  settings.score = 0;
-  settings.start = true;
-  gameArea.appendChild(car);
-  settings.x = car.offsetLeft;
-  settings.y = car.offsetTop;
+    player.start = true;
+    player.score = 0;
 
-  audio.play();
-  requestAnimationFrame(playGame);
-});
+    if (difficulty === "easy") player.speed = 3;
+    if (difficulty === "medium") player.speed = 5;
+    if (difficulty === "hard") player.speed = 8;
 
-function startGame(e) {
-  e.preventDefault();
-  keys[e.key] = true;
-}
+    window.requestAnimationFrame(gamePlay);
 
-function stopGame(e) {
-  e.preventDefault();
-  keys[e.key] = false;
-}
+    // 🔥 PLAY AUDIO
+    gameAudio.currentTime = 0;
+    gameAudio.play().catch(() => {});
 
-function playGame() {
-  if (settings.start) {
-    settings.score += settings.speed;
-    score.innerHTML = 'Score <br>' + settings.score;
-
-    moveRoad();
-    moveEnemy();
-
-    if (keys.ArrowLeft && settings.x > 0) settings.x -= settings.speed;
-    if (keys.ArrowRight && settings.x < gameArea.offsetWidth - car.offsetWidth) settings.x += settings.speed;
-    if (keys.ArrowUp && settings.y > 0) settings.y -= settings.speed;
-    if (keys.ArrowDown && settings.y < gameArea.offsetHeight - car.offsetHeight) settings.y += settings.speed;
-
-    car.style.top = settings.y + 'px';
-    car.style.left = settings.x + 'px';
-
-    requestAnimationFrame(playGame);
-  }
-}
-
-function moveRoad() {
-  document.querySelectorAll('.line').forEach(line => {
-    line.y += settings.speed;
-    line.style.top = line.y + 'px';
-    if (line.y >= window.innerHeight) line.y = -80;
-  });
-}
-
-function moveEnemy() {
-  document.querySelectorAll('.enemy').forEach(enemy => {
-    let carRect = car.getBoundingClientRect();
-    let enemyRect = enemy.getBoundingClientRect();
-
-    if (
-      carRect.top <= enemyRect.bottom &&
-      carRect.right >= enemyRect.left &&
-      carRect.left <= enemyRect.right &&
-      carRect.bottom >= enemyRect.top
-    ) {
-      settings.start = false;
-      audio.pause();
-      startMenu.classList.remove('hide');
+    // road lines
+    for (let x = 0; x < 5; x++) {
+        let roadLine = document.createElement("div");
+        roadLine.setAttribute("class", "line");
+        roadLine.y = (x * 150);
+        roadLine.style.top = roadLine.y + "px";
+        gameArea.appendChild(roadLine);
     }
 
-    enemy.y += settings.speed / 2;
-    enemy.style.top = enemy.y + 'px';
+    // player car
+    let car = document.createElement("div");
+    car.setAttribute("class", "car");
+    gameArea.appendChild(car);
 
-    if (enemy.y >= window.innerHeight) {
-      enemy.y = -80 * settings.traffic;
-      enemy.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
+    player.x = car.offsetLeft;
+    player.y = car.offsetTop;
+
+    // enemies
+    for (let x = 0; x < 3; x++) {
+        let enemy = document.createElement("div");
+        enemy.setAttribute("class", "enemy");
+        enemy.y = ((x + 1) * 300) * -1;
+        enemy.style.top = enemy.y + "px";
+        enemy.style.left = Math.floor(Math.random() * 350) + "px";
+        enemy.style.backgroundImage = `url("image/enemy${Math.floor(Math.random() * 5) + 1}.png")`;
+        gameArea.appendChild(enemy);
     }
-  });
+}
+
+// 🔥 KEYS
+let keys = {
+    ArrowUp: false,
+    ArrowDown: false,
+    ArrowLeft: false,
+    ArrowRight: false
+};
+
+document.addEventListener("keydown", keyDown);
+document.addEventListener("keyup", keyUp);
+
+function keyDown(e) {
+    e.preventDefault();
+    keys[e.key] = true;
+}
+
+function keyUp(e) {
+    e.preventDefault();
+    keys[e.key] = false;
+}
+
+// 🔥 GAME LOOP
+function gamePlay() {
+    let car = document.querySelector(".car");
+    let road = gameArea.getBoundingClientRect();
+
+    if (player.start) {
+
+        moveLines();
+        moveEnemy(car);
+
+        // movement
+        if (keys.ArrowUp && player.y > 0) player.y -= player.speed;
+        if (keys.ArrowDown && player.y < (road.height - 100)) player.y += player.speed;
+        if (keys.ArrowLeft && player.x > 0) player.x -= player.speed;
+        if (keys.ArrowRight && player.x < (road.width - 50)) player.x += player.speed;
+
+        car.style.top = player.y + "px";
+        car.style.left = player.x + "px";
+
+        player.score++;
+        scoreDisplay.innerText = "Score: " + player.score;
+
+        window.requestAnimationFrame(gamePlay);
+    }
+}
+
+// 🔥 MOVE ROAD
+function moveLines() {
+    let lines = document.querySelectorAll(".line");
+
+    lines.forEach(line => {
+        if (line.y >= 700) {
+            line.y -= 750;
+        }
+        line.y += player.speed;
+        line.style.top = line.y + "px";
+    });
+}
+
+// 🔥 MOVE ENEMY
+function moveEnemy(car) {
+    let enemy = document.querySelectorAll(".enemy");
+
+    enemy.forEach(item => {
+        if (isCollide(car, item)) {
+            endGame();
+        }
+
+        if (item.y >= 750) {
+            item.y = -300;
+            item.style.left = Math.floor(Math.random() * 350) + "px";
+        }
+
+        item.y += player.speed;
+        item.style.top = item.y + "px";
+    });
+}
+
+// 🔥 COLLISION
+function isCollide(a, b) {
+    let aRect = a.getBoundingClientRect();
+    let bRect = b.getBoundingClientRect();
+
+    return !(
+        aRect.bottom < bRect.top ||
+        aRect.top > bRect.bottom ||
+        aRect.right < bRect.left ||
+        aRect.left > bRect.right
+    );
+}
+
+// 🔥 END GAME
+function endGame() {
+    player.start = false;
+
+    gameAudio.pause();
+
+    startScreen.classList.remove("hide");
+    startScreen.querySelector(".game__start").innerText = "Restart Game";
 }

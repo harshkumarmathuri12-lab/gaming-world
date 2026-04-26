@@ -13,8 +13,9 @@ html, body {
   width: 100%;
 }
 
+/* BODY */
 body {
-  overflow: hidden;
+  overflow: auto;
   font-family: Arial, sans-serif;
   background: #000;
 }
@@ -31,11 +32,11 @@ body {
   display: none;
 }
 
-/* 🔥 GAME AREA (CRITICAL FIX) */
+/* 🔥 GAME AREA (FINAL FIX) */
 .gamearea {
-  height: 100vh;
+  height: calc(100vh - 60px); /* cut fix */
   width: 100%;
-  max-width: 500px;   /* keeps original layout */
+  max-width: 500px;
   margin: 0 auto;
   position: relative;
   background: #777;
@@ -53,7 +54,7 @@ body {
   background-position: center;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);  /* center fix */
+  transform: translateX(-50%);
   bottom: 10px;
 }
 
@@ -83,7 +84,7 @@ body {
   z-index: 100;
 }
 
-/* MENU CONTAINER */
+/* MENU */
 .start__menu-container {
   width: 100%;
 }
@@ -98,20 +99,17 @@ body {
   font-weight: 500;
 }
 
-/* TITLE */
 .difficulty__title {
   font-size: 1.4rem;
   color: var(--color-dark);
 }
 
-/* SUBTITLE */
 .difficulty__subtitle {
   font-size: 0.95rem;
   color: #999;
   margin-bottom: 15px;
 }
 
-/* SELECTED TEXT */
 .difficulty-selected {
   font-size: 0.95rem;
   color: #999;
@@ -162,6 +160,8 @@ body {
 
 /* SCORE */
 .score_container {
+  position: relative;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -184,22 +184,16 @@ body {
   text-align: center;
 }
 
-/* SCREEN SYSTEM */
+/* SCREEN FIX */
 .screen {
-  height: 100vh;
   width: 100%;
-  transition: margin 0.5s ease;
+  height: auto;
 }
 
-/* ANIMATION */
-.screen-up {
-  margin-top: -100vh;
-}
-
-/* 🔥 MOBILE FIX */
+/* MOBILE FIX */
 @media (max-width: 600px) {
   .gamearea {
-    max-width: 100%;
+    height: calc(100vh - 60px);
   }
 
   .car,

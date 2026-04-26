@@ -24,7 +24,7 @@
       gtag('config', 'G-00MX0SDY01');
     </script>
 
-    <!-- 🔥 INLINE FIX (important) -->
+    <!-- 🔥 FIXED POPUP STYLE -->
     <style>
         #game-container {
             display: none;
@@ -53,7 +53,7 @@
             top: 10px;
             right: 20px;
             z-index: 10000;
-            font-size: 20px;
+            font-size: 18px;
             background: red;
             color: white;
             border: none;
@@ -139,7 +139,7 @@
             <h3>Ultra Shot</h3>
         </div>
 
-        <!-- 🔥 ROAD RIDER FIXED -->
+        <!-- 🔥 ROAD RIDER FIX -->
         <div class="game" onclick="openGame('/Road_Rider/Road_Rider.html')">
             <img src="Road_Riderlogo.png" alt="Road Rider Racing Game">
             <h3>Road Rider</h3>
@@ -148,12 +148,16 @@
     </div>
 </section>
 
-<!-- 🔥 GAME POPUP FIXED -->
+<!-- 🔥 FIXED POPUP -->
 <div id="game-container">
     <button onclick="closeGame()" class="close-btn">X</button>
 
     <div class="game-box">
-        <iframe id="game-frame" allowfullscreen></iframe>
+        <iframe 
+            id="game-frame"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+        </iframe>
     </div>
 </div>
 
