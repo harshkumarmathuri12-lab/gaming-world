@@ -3,80 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- 🔥 SEO TITLE -->
-    <title>Play Snake Game Online Free - No Download | GamesHubX</title>
-
-    <!-- 🔥 SEO META -->
-    <meta name="description" content="Play Snake Game online for free. No download required. Enjoy classic snake gameplay directly in your browser on GamesHubX.">
-    <meta name="keywords" content="snake game online, play snake game free, classic snake game browser, snake game no download">
-    <meta name="robots" content="index, follow">
-
-    <!-- 🔥 Open Graph -->
-    <meta property="og:title" content="Snake Game Online Free">
-    <meta property="og:description" content="Play Snake Game instantly without download.">
-    <meta property="og:type" content="website">
-
+    <title>Snake Game</title>
     <link rel="stylesheet" href="SnakeGame.css">
 </head>
-
 <body>
-
-<header>
-    <h1>Snake Game Online</h1>
-    <p>Play classic snake game for free — no download needed</p>
-</header>
-
-<!-- 🎮 GAME SECTION -->
-<section class="game-container">
-    <h2>Start Playing</h2>
-
-    <div id="score">Score: 0</div>
-
-    <div id="game-board">
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div class="game-container">
+        <h1>Snake Game</h1>
+        <div id="score">Score: 0</div>
+        <div id="game-board">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+        </div>
+        <button id="startButton" onclick="startGame()">Start Game</button>
     </div>
 
-    <button id="startButton" onclick="startGame()">Start Game</button>
-</section>
-
-<!-- 🧠 CONTENT SECTION (IMPORTANT FOR SEO) -->
-<section>
-    <h2>How to Play Snake Game</h2>
-    <p>
-        The Snake Game is a classic arcade game where you control a snake that grows longer as it eats food.
-        Use arrow keys to move the snake and avoid hitting the walls or yourself.
-    </p>
-
-    <h3>Controls</h3>
-    <ul>
-        <li>⬆️ Up Arrow – Move Up</li>
-        <li>⬇️ Down Arrow – Move Down</li>
-        <li>⬅️ Left Arrow – Move Left</li>
-        <li>➡️ Right Arrow – Move Right</li>
-    </ul>
-
-    <h3>Game Tips</h3>
-    <p>
-        Try to stay in the center of the board and avoid quick turns. Plan your moves ahead as the snake grows longer.
-    </p>
-</section>
-
-<!-- 🔗 INTERNAL LINKING -->
-<section>
-    <h2>More Games</h2>
-    <ul>
-        <li><a href="sudoku.html">Play Sudoku</a></li>
-        <li><a href="chess.html">Play Chess</a></li>
-        <li><a href="numbermergegame.html">Play Number Merge</a></li>
-    </ul>
-</section>
-
-<footer>
-    <p>© 2026 GamesHubX</p>
-</footer>
-
-<script src="SnakeGame.js"></script>
-
+    <script src="SnakeGame.js"></script>
 </body>
 </html>
