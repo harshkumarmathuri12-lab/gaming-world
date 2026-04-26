@@ -1,6 +1,13 @@
-body {
+/* RESET */
+* {
     margin: 0;
-    font-family: Arial;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: Arial, sans-serif;
     background: #121212;
     color: white;
 }
@@ -12,6 +19,9 @@ header {
     align-items: center;
     padding: 15px 30px;
     background: #1e1e1e;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 /* LOGO */
@@ -36,10 +46,11 @@ header {
 
 /* NAV */
 nav a {
-    margin: 0 10px;
+    margin: 0 12px;
     color: white;
     text-decoration: none;
     font-weight: 500;
+    transition: 0.2s;
 }
 
 nav a:hover {
@@ -52,48 +63,67 @@ nav a:hover {
     padding: 60px 20px;
 }
 
-/* GAMES */
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #aaa;
+}
+
+/* GAMES SECTION */
 .games-section {
-    padding: 20px;
+    padding: 30px 20px;
     text-align: center;
 }
 
+.games-section h2 {
+    margin-bottom: 20px;
+}
+
+/* GRID FIX (IMPORTANT) */
 .game-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
 }
 
+/* GAME CARD */
 .game {
-    width: 180px;
     background: #222;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .game:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
+    background: #2a2a2a;
 }
 
 .game img {
     width: 100%;
+    height: 140px;
+    object-fit: cover;
     border-radius: 10px;
 }
 
-/* POPUP */
+.game h3 {
+    margin-top: 8px;
+    font-size: 16px;
+}
+
+/* POPUP (FIXED) */
 #game-container {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.95);
+    width: 100%;
+    height: 100%;
+    background: black;
     display: none;
-    justify-content: center;
-    align-items: center;
     z-index: 9999;
 }
 
@@ -109,40 +139,59 @@ nav a:hover {
     border: none;
 }
 
+/* CLOSE BUTTON */
 .close-btn {
     position: absolute;
     top: 15px;
     right: 15px;
-    padding: 10px 15px;
+    padding: 10px 14px;
     background: red;
     border: none;
     color: white;
     font-size: 16px;
     cursor: pointer;
     z-index: 10000;
+    border-radius: 6px;
 }
 
 /* CONTACT */
 #contact {
     text-align: center;
-    padding: 40px;
+    padding: 50px 20px;
+}
+
+#contact h2 {
+    margin-bottom: 20px;
 }
 
 #contact input,
 #contact textarea {
     display: block;
     margin: 10px auto;
-    padding: 10px;
-    width: 80%;
+    padding: 12px;
+    width: 90%;
     max-width: 400px;
+    border: none;
+    border-radius: 6px;
+}
+
+#contact textarea {
+    min-height: 100px;
 }
 
 #contact button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     background: #00c3ff;
     border: none;
     color: black;
     cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+#contact button:hover {
+    background: #00a6d6;
 }
 
 /* FOOTER */
@@ -150,4 +199,21 @@ footer {
     text-align: center;
     padding: 20px;
     background: #1e1e1e;
+    margin-top: 30px;
+}
+
+/* 🔥 MOBILE OPTIMIZATION */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .game img {
+        height: 120px;
+    }
 }

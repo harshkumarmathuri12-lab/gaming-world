@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>GamesHubX | Play Free Online Games</title>
+    <title>GamesHubX - Play Free Online Games (Snake, Sudoku, Chess & More)</title>
 
-    <meta name="description" content="Play free online games like Snake, Sudoku, Chess and more instantly on GamesHubX.">
-    <meta name="keywords" content="gameshubx, free online games, snake game, sudoku, chess">
+    <meta name="description" content="Play free online games like Snake, Sudoku, Chess, Racing and more instantly on GamesHubX. No download needed.">
+    <meta name="keywords" content="gameshubx, free online games, racing game, snake game, sudoku, chess, browser games">
     <meta name="robots" content="index, follow">
 
     <link rel="canonical" href="https://gameshubx.com/">
@@ -23,6 +23,45 @@
       gtag('js', new Date());
       gtag('config', 'G-00MX0SDY01');
     </script>
+
+    <!-- 🔥 INLINE FIX (important) -->
+    <style>
+        #game-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 9999;
+        }
+
+        .game-box {
+            width: 100%;
+            height: 100%;
+        }
+
+        #game-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            z-index: 10000;
+            font-size: 20px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -41,8 +80,8 @@
 </header>
 
 <section id="home" class="hero">
-    <h1>GamesHubX</h1>
-    <p>Play Free Online Games Instantly</p>
+    <h1>Play Free Online Games</h1>
+    <p>Snake, Sudoku, Chess, Racing and more — no download needed</p>
 </section>
 
 <section id="featured" class="games-section">
@@ -100,19 +139,21 @@
             <h3>Ultra Shot</h3>
         </div>
 
+        <!-- 🔥 ROAD RIDER FIXED -->
+        <div class="game" onclick="openGame('/Road_Rider/Road_Rider.html')">
+            <img src="Road_Riderlogo.png" alt="Road Rider Racing Game">
+            <h3>Road Rider</h3>
+        </div>
+
     </div>
 </section>
 
-<!-- GAME POPUP -->
+<!-- 🔥 GAME POPUP FIXED -->
 <div id="game-container">
-    <div class="game-box">
-        <button onclick="closeGame()" class="close-btn">X</button>
+    <button onclick="closeGame()" class="close-btn">X</button>
 
-        <iframe 
-            id="game-frame" 
-            allowfullscreen 
-            allow="autoplay; fullscreen; gamepad; keyboard">
-        </iframe>
+    <div class="game-box">
+        <iframe id="game-frame" allowfullscreen></iframe>
     </div>
 </div>
 

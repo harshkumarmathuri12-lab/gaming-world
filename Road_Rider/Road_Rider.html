@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Racing game</title>
+    <link rel="stylesheet" href="Road_Rider.css" />
+  </head>
+  <body>
+    <div class="screen">
+      <div class="start__menu slideDown">
+        <div class="start__menu-container">
+          <div class="difficulty">
+            <p class="difficulty__title">Select difficulty level</p>
+            <p class="difficulty__subtitle">(default is medium)</p>
+            <button class="difficulty__button easy">Easy</button>
+            <button class="difficulty__button medium">Medium</button>
+            <button class="difficulty__button hard">Hard</button>
+            <p class="difficulty-selected"></p>
+          </div>
+
+          <button class="game__start">Start Game</button>
+        </div>
+        <!-- /.start__menu-container -->
+      </div>
+    </div>
+    <div class="screen">
+      <div class="score_container hide">
+        <div class="score_inner">
+          <div class="score"></div>
+        </div>
+      </div>
+      <div class="game">
+        <div class="gamearea"></div>
+      </div>
+    </div>
+
+    <script src="Road_Rider.js"></script>
+  </body>
+</html>

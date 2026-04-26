@@ -1,0 +1,214 @@
+/* RESET */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BASE */
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: #000;
+}
+
+/* VARIABLES */
+:root {
+  --color-dark: #17181c;
+  --color-white: #f7f7f7;
+  --color-surf: #08fdd8;
+}
+
+/* HIDE */
+.hide {
+  display: none;
+}
+
+/* 🔥 GAME AREA (CRITICAL FIX) */
+.gamearea {
+  height: 100vh;
+  width: 100%;
+  max-width: 500px;   /* keeps original layout */
+  margin: 0 auto;
+  position: relative;
+  background: #777;
+  overflow: hidden;
+}
+
+/* PLAYER + ENEMY */
+.car,
+.enemy {
+  width: 50px;
+  height: 100px;
+  background-image: url("image/player.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);  /* center fix */
+  bottom: 10px;
+}
+
+/* ROAD LINES */
+.line {
+  position: absolute;
+  width: 10px;
+  height: 50px;
+  background: #fff;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* START MENU */
+.start__menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 450px;
+  background: var(--color-white);
+  text-align: center;
+  border: 2px solid var(--color-dark);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 100;
+}
+
+/* MENU CONTAINER */
+.start__menu-container {
+  width: 100%;
+}
+
+/* DIFFICULTY */
+.difficulty {
+  padding: 20px 0;
+  border-bottom: 2px solid var(--color-dark);
+}
+
+.difficulty p {
+  font-weight: 500;
+}
+
+/* TITLE */
+.difficulty__title {
+  font-size: 1.4rem;
+  color: var(--color-dark);
+}
+
+/* SUBTITLE */
+.difficulty__subtitle {
+  font-size: 0.95rem;
+  color: #999;
+  margin-bottom: 15px;
+}
+
+/* SELECTED TEXT */
+.difficulty-selected {
+  font-size: 0.95rem;
+  color: #999;
+  margin-top: 10px;
+}
+
+/* BUTTONS */
+.difficulty__button {
+  cursor: pointer;
+  min-width: 90px;
+  padding: 8px 10px;
+  margin: 5px;
+  font-size: 0.95rem;
+  color: #fff;
+  background-color: var(--color-dark);
+  border: 1px solid var(--color-dark);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.difficulty__button.active {
+  color: var(--color-dark);
+  background-color: #fff;
+}
+
+.difficulty__button:hover {
+  color: var(--color-dark);
+  background-color: #fff;
+  border-color: #999;
+}
+
+/* START BUTTON */
+.game__start {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.2rem;
+  color: #fff;
+  background: var(--color-dark);
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.game__start:hover {
+  color: var(--color-dark);
+  background: #fff;
+}
+
+/* SCORE */
+.score_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  background: var(--color-dark);
+  font-size: 1.4rem;
+  color: var(--color-surf);
+}
+
+.score_inner {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 100%;
+}
+
+.score_inner div {
+  flex: 1;
+  text-align: center;
+}
+
+/* SCREEN SYSTEM */
+.screen {
+  height: 100vh;
+  width: 100%;
+  transition: margin 0.5s ease;
+}
+
+/* ANIMATION */
+.screen-up {
+  margin-top: -100vh;
+}
+
+/* 🔥 MOBILE FIX */
+@media (max-width: 600px) {
+  .gamearea {
+    max-width: 100%;
+  }
+
+  .car,
+  .enemy {
+    width: 40px;
+    height: 80px;
+  }
+
+  .line {
+    height: 40px;
+  }
+}
