@@ -4,19 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 🔥 SEO TITLE -->
-    <title>Play Free Online Games - Snake, Sudoku, Chess | GamesHubX</title>
+    <!-- 🔥 SEO TITLE (Brand Strong) -->
+    <title>GamesHubX - Play Free Online Games (Snake, Sudoku, Chess)</title>
 
     <!-- 🔥 SEO META -->
-    <meta name="description" content="Play free online games like Snake, Sudoku, Chess and more instantly on GamesHubX. No download required.">
-    <meta name="keywords" content="free online games, snake game, sudoku online, chess game, play games online">
+    <meta name="description" content="GamesHubX is a free online gaming website. Play Snake, Sudoku, Chess and more instantly without download.">
+    <meta name="keywords" content="gameshubx, free online games, snake game, sudoku online, chess game, play games online">
     <meta name="robots" content="index, follow">
 
-    <!-- 🔥 Open Graph (for sharing) -->
+    <!-- 🔥 Canonical (IMPORTANT) -->
+    <link rel="canonical" href="https://gameshubx.com/">
+
+    <!-- 🔥 Open Graph -->
     <meta property="og:title" content="GamesHubX - Free Online Games">
     <meta property="og:description" content="Play awesome games instantly without download.">
-    <meta property="og:image" content="logo.png">
+    <meta property="og:image" content="https://gameshubx.com/logo.png">
+    <meta property="og:url" content="https://gameshubx.com/">
     <meta property="og:type" content="website">
+
+    <!-- 🔥 Structured Data (VERY IMPORTANT FOR BRAND) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "GamesHubX",
+      "url": "https://gameshubx.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://gameshubx.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
 
     <link rel="stylesheet" href="home.css">
 
@@ -46,8 +65,8 @@
 </header>
 
 <section id="home" class="hero">
-    <h1>Play Free Online Games</h1>
-    <p>Snake, Sudoku, Chess and more — no download needed</p>
+    <h1>GamesHubX - Play Free Online Games</h1>
+    <p>Play Snake, Sudoku, Chess and more instantly — no download needed</p>
 </section>
 
 <section id="featured" class="games-section">
@@ -56,17 +75,17 @@
     <div class="game-list">
 
         <div class="game" onclick="openGame('SnakeGame.html')">
-            <img src="OIP.jpg" alt="Snake Game">
+            <img src="OIP.jpg" alt="Snake Game Online">
             <h3>Snake Game</h3>
         </div>
 
         <div class="game" onclick="openGame('sudoku.html')">
-            <img src="sudoku.jpg" alt="Sudoku Game">
+            <img src="sudoku.jpg" alt="Sudoku Game Online">
             <h3>Sudoku</h3>
         </div>
 
         <div class="game" onclick="openGame('chess.html')">
-            <img src="chess.png" alt="Chess Game">
+            <img src="chess.png" alt="Chess Game Online">
             <h3>Chess</h3>
         </div>
 
@@ -122,7 +141,7 @@
 </div>
 
 <section id="contact">
-    <h2>Contact Us</h2>
+    <h2>Contact GamesHubX</h2>
     <form>
         <input type="text" placeholder="Your Name" required>
         <input type="email" placeholder="Your Email" required>
@@ -132,7 +151,7 @@
 </section>
 
 <footer>
-    <p>© 2026 GamesHubX</p>
+    <p>© 2026 GamesHubX - Free Online Games</p>
 </footer>
 
 <script src="home.js"></script>
