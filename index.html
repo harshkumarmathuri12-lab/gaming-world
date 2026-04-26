@@ -4,28 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 🔥 TITLE (Brand First Priority) -->
+    <!-- TITLE -->
     <title>GamesHubX | Play Free Online Games</title>
 
-    <!-- 🔥 META -->
-    <meta name="description" content="GamesHubX is a free online gaming website. Play Snake, Sudoku, Chess and more instantly without download.">
-    <meta name="keywords" content="gameshubx, play games online, free games, snake game, sudoku, chess">
+    <!-- META -->
+    <meta name="description" content="Play free online games like Snake, Sudoku, Chess and more instantly on GamesHubX.">
+    <meta name="keywords" content="gameshubx, free online games, snake game, sudoku, chess">
     <meta name="robots" content="index, follow">
 
-    <!-- 🔥 CANONICAL -->
+    <!-- CANONICAL -->
     <link rel="canonical" href="https://gameshubx.com/">
 
-    <!-- 🔥 FAVICON (IMPORTANT FOR BRAND) -->
-    <link rel="icon" type="image/png" href="logo.png">
+    <!-- FAVICON -->
+    <link rel="icon" href="logo.png">
 
-    <!-- 🔥 OPEN GRAPH -->
+    <!-- OG -->
     <meta property="og:title" content="GamesHubX - Free Online Games">
     <meta property="og:description" content="Play games instantly without download.">
     <meta property="og:image" content="https://gameshubx.com/logo.png">
     <meta property="og:url" content="https://gameshubx.com/">
-    <meta property="og:type" content="website">
 
-    <!-- 🔥 STRUCTURED DATA -->
+    <!-- STRUCTURED DATA -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -37,7 +36,7 @@
 
     <link rel="stylesheet" href="home.css">
 
-    <!-- 🔥 GOOGLE ANALYTICS -->
+    <!-- GOOGLE ANALYTICS -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-00MX0SDY01"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -68,30 +67,64 @@
 </section>
 
 <section id="featured" class="games-section">
-    <h2>Popular Games</h2>
+    <h2>Featured Games</h2>
 
     <div class="game-list">
 
         <div class="game" onclick="openGame('SnakeGame.html')">
-            <img src="OIP.jpg" alt="Play Snake Game Online">
-            <h3>Snake Game</h3>
+            <img src="OIP.jpg" alt="Snake Game">
+            <h3>Snake</h3>
         </div>
 
         <div class="game" onclick="openGame('sudoku.html')">
-            <img src="sudoku.jpg" alt="Play Sudoku Online">
+            <img src="sudoku.jpg" alt="Sudoku Game">
             <h3>Sudoku</h3>
         </div>
 
         <div class="game" onclick="openGame('chess.html')">
-            <img src="chess.png" alt="Play Chess Online">
+            <img src="chess.png" alt="Chess Game">
             <h3>Chess</h3>
         </div>
 
-        <!-- baki same rehne de -->
-        
+        <div class="game" onclick="openGame('numbermergegame.html')">
+            <img src="number merge.webp" alt="Number Merge Game">
+            <h3>Number Merge</h3>
+        </div>
+
+        <div class="game" onclick="openGame('pingpong.html')">
+            <img src="ping pong.webp" alt="Ping Pong Game">
+            <h3>Ping Pong</h3>
+        </div>
+
+        <div class="game" onclick="openGame('Cube_Minion_Rush.html')">
+            <img src="Cube Minion Rush.jpg" alt="Cube Minion Rush Game">
+            <h3>Cube Minion Rush</h3>
+        </div>
+
+        <div class="game" onclick="openGame('ninja_toy_match.html')">
+            <img src="ninja_toy_match.jpg" alt="Ninja Toy Match Game">
+            <h3>Ninja Toy Match</h3>
+        </div>
+
+        <div class="game" onclick="openGame('Bike_Rush_Xtreme.html')">
+            <img src="Bike_Rush_Xtreme.jpg" alt="Bike Rush Xtreme Game">
+            <h3>Bike Rush Xtreme</h3>
+        </div>
+
+        <div class="game" onclick="openGame('Toxic_Arena_Biological_Threat.html')">
+            <img src="Toxic Arena Biological Threat.jpg" alt="Toxic Arena Game">
+            <h3>Toxic Arena</h3>
+        </div>
+
+        <div class="game" onclick="openGame('Ultra_Shot.html')">
+            <img src="Ultra_Shot.webp" alt="Ultra Shot Game">
+            <h3>Ultra Shot</h3>
+        </div>
+
     </div>
 </section>
 
+<!-- GAME POPUP -->
 <div id="game-container">
     <div class="game-box">
         <button onclick="closeGame()" class="close-btn">X</button>
