@@ -6,27 +6,25 @@ body {
     min-height: 100vh;
 }
 
-.site-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    padding: 12px;
-    background: #151515;
+body:not(.iframe-game-page) {
+    padding-top: 48px;
 }
 
-.site-nav a {
+.back-home {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
     color: #fff;
     text-decoration: none;
     font: 600 14px Arial, sans-serif;
     padding: 8px 10px;
     border-radius: 6px;
-    background: #2a2a2a;
+    background: rgba(0, 0, 0, 0.72);
 }
 
-.site-nav a:hover,
-.site-nav a:focus {
+.back-home:hover,
+.back-home:focus {
     background: #00a6d6;
     color: #000;
 }
@@ -36,12 +34,6 @@ body {
     background: #000;
     color: #fff;
     overflow: hidden;
-}
-
-.iframe-game-page .site-nav {
-    position: fixed;
-    inset: 0 0 auto 0;
-    z-index: 2;
 }
 
 .iframe-game-page h1 {
@@ -57,9 +49,9 @@ body {
 
 .iframe-game-page iframe {
     position: fixed;
-    top: 44px;
+    top: 0;
     left: 0;
     width: 100vw;
-    height: calc(100vh - 44px);
+    height: 100vh;
     border: none;
 }
