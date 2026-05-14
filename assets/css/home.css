@@ -91,10 +91,13 @@ nav a:hover {
 
 /* GAME CARD */
 .game {
+    display: block;
     background: #222;
     padding: 10px;
     border-radius: 12px;
     cursor: pointer;
+    color: white;
+    text-decoration: none;
     transition: 0.3s;
 }
 

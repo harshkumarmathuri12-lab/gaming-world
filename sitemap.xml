@@ -1,20 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://gameshubx.com/</loc>
   </url>
-
   <url>
-    <loc>https://gameshubx.com/SnakeGame.html</loc>
+    <loc>https://gameshubx.com/games/snake-game.html</loc>
   </url>
-
   <url>
-    <loc>https://gameshubx.com/sudoku.html</loc>
+    <loc>https://gameshubx.com/games/tic-tac-toe.html</loc>
   </url>
-
   <url>
-    <loc>https://gameshubx.com/chess.html</loc>
+    <loc>https://gameshubx.com/games/number-merge-game.html</loc>
   </url>
-
+  <url>
+    <loc>https://gameshubx.com/games/sudoku.html</loc>
+  </url>
+  <url>
+    <loc>https://gameshubx.com/games/chess.html</loc>
+  </url>
+  <url>
+    <loc>https://gameshubx.com/games/ping-pong.html</loc>
+  </url>
+  <url>
+    <loc>https://gameshubx.com/games/tap-match.html</loc>
+  </url>
+  <url>
+    <loc>https://gameshubx.com/games/word-finder.html</loc>
+  </url>
+  <url>
+    <loc>https://gameshubx.com/games/racing-game.html</loc>
+  </url>
+  <url>
+    <loc>https://gameshubx.com/games/cube-minion-rush.html</loc>
+  </url>
+  <url>
+    <loc>https://gameshubx.com/games/ninja-toy-match.html</loc>
+  </url>
+  <url>
+    <loc>https://gameshubx.com/games/bike-rush-xtreme.html</loc>
+  </url>
+  <url>
+    <loc>https://gameshubx.com/games/toxic-arena-biological-threat.html</loc>
+  </url>
+  <url>
+    <loc>https://gameshubx.com/games/ultra-shot.html</loc>
+  </url>
+  <url>
+    <loc>https://gameshubx.com/games/road-rider.html</loc>
+  </url>
 </urlset>

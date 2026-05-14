@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>GamesHubX - Play Free Online Games (Snake, Sudoku, Chess & More)</title>
-
-    <meta name="description" content="Play free online games like Snake, Sudoku, Chess, Racing and more instantly on GamesHubX. No download needed.">
-    <meta name="keywords" content="gameshubx, free online games, racing game, snake game, sudoku, chess, browser games">
+    <title>GamesHubX - Play Free Online Games</title>
+    <meta name="description" content="Play free online games including Snake, Sudoku, Chess, Number Merge, Ping Pong, Road Rider, and more at GamesHubX.">
+    <meta name="keywords" content="gameshubx, free online games, browser games, snake game, sudoku, chess, racing game">
     <meta name="robots" content="index, follow">
-
     <link rel="canonical" href="https://gameshubx.com/">
-    <link rel="icon" href="logo.png">
-
-    <link rel="stylesheet" href="home.css">
-
-    <!-- Google Analytics -->
+    <link rel="icon" href="assets/images/logo.png">
+    <link rel="stylesheet" href="assets/css/home.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-00MX0SDY01"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -23,55 +17,13 @@
       gtag('js', new Date());
       gtag('config', 'G-00MX0SDY01');
     </script>
-
-    <!-- 🔥 FIXED POPUP STYLE -->
-    <style>
-        #game-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            z-index: 9999;
-        }
-
-        .game-box {
-            width: 100%;
-            height: 100%;
-        }
-
-        #game-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            z-index: 10000;
-            font-size: 18px;
-            background: red;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-        }
-    </style>
-
 </head>
-
 <body>
-
 <header>
     <div class="logo">
-        <img src="logo.png" alt="GamesHubX Logo" class="logo-img">
+        <img src="assets/images/logo.png" alt="GamesHubX Logo" class="logo-img">
         <span class="logo-text">GamesHubX</span>
     </div>
-
     <nav>
         <a href="#home">Home</a>
         <a href="#featured">Games</a>
@@ -79,103 +31,100 @@
     </nav>
 </header>
 
-<section id="home" class="hero">
-    <h1>Play Free Online Games</h1>
-    <p>Snake, Sudoku, Chess, Racing and more — no download needed</p>
-</section>
+<main>
+    <section id="home" class="hero">
+        <h1>Play Free Online Games</h1>
+        <p>Snake, Sudoku, Chess, Racing and more - no download needed.</p>
+    </section>
 
-<section id="featured" class="games-section">
-    <h2>Featured Games</h2>
-
-    <div class="game-list">
-
-        <div class="game" onclick="openGame('SnakeGame.html')">
-            <img src="OIP.jpg" alt="Snake Game">
-            <h3>Snake</h3>
+    <section id="featured" class="games-section">
+        <h2>Featured Games</h2>
+        <div class="game-list">
+            <a class="game" href="games/snake-game.html" onclick="openGame('games/snake-game.html'); return false;">
+                <img src="assets/images/snake-game.jpg" alt="Snake Game">
+                <h3>Snake</h3>
+            </a>
+            <a class="game" href="games/sudoku.html" onclick="openGame('games/sudoku.html'); return false;">
+                <img src="assets/images/sudoku.jpg" alt="Sudoku Game">
+                <h3>Sudoku</h3>
+            </a>
+            <a class="game" href="games/chess.html" onclick="openGame('games/chess.html'); return false;">
+                <img src="assets/images/chess.png" alt="Chess Game">
+                <h3>Chess</h3>
+            </a>
+            <a class="game" href="games/number-merge-game.html" onclick="openGame('games/number-merge-game.html'); return false;">
+                <img src="assets/images/number-merge-game.webp" alt="Number Merge Game">
+                <h3>Number Merge</h3>
+            </a>
+            <a class="game" href="games/ping-pong.html" onclick="openGame('games/ping-pong.html'); return false;">
+                <img src="assets/images/ping-pong.webp" alt="Ping Pong Game">
+                <h3>Ping Pong</h3>
+            </a>
+            <a class="game" href="games/tap-match.html" onclick="openGame('games/tap-match.html'); return false;">
+                <img src="assets/images/tap-match.webp" alt="Tap Match Game">
+                <h3>Tap Match</h3>
+            </a>
+            <a class="game" href="games/word-finder.html" onclick="openGame('games/word-finder.html'); return false;">
+                <img src="assets/images/word-finder.webp" alt="Word Finder Game">
+                <h3>Word Finder</h3>
+            </a>
+            <a class="game" href="games/tic-tac-toe.html" onclick="openGame('games/tic-tac-toe.html'); return false;">
+                <img src="assets/images/tic-tac-toe.jpg" alt="Tic-Tac-Toe Game">
+                <h3>Tic-Tac-Toe</h3>
+            </a>
+            <a class="game" href="games/racing-game.html" onclick="openGame('games/racing-game.html'); return false;">
+                <img src="assets/images/racing-game.jpg" alt="Racing Game">
+                <h3>Racing Game</h3>
+            </a>
+            <a class="game" href="games/cube-minion-rush.html" onclick="openGame('games/cube-minion-rush.html'); return false;">
+                <img src="assets/images/cube-minion-rush.jpg" alt="Cube Minion Rush Game">
+                <h3>Cube Minion Rush</h3>
+            </a>
+            <a class="game" href="games/ninja-toy-match.html" onclick="openGame('games/ninja-toy-match.html'); return false;">
+                <img src="assets/images/ninja-toy-match.jpg" alt="Ninja Toy Match Game">
+                <h3>Ninja Toy Match</h3>
+            </a>
+            <a class="game" href="games/bike-rush-xtreme.html" onclick="openGame('games/bike-rush-xtreme.html'); return false;">
+                <img src="assets/images/bike-rush-xtreme.jpg" alt="Bike Rush Xtreme Game">
+                <h3>Bike Rush Xtreme</h3>
+            </a>
+            <a class="game" href="games/toxic-arena-biological-threat.html" onclick="openGame('games/toxic-arena-biological-threat.html'); return false;">
+                <img src="assets/images/toxic-arena-biological-threat.jpg" alt="Toxic Arena Biological Threat Game">
+                <h3>Toxic Arena</h3>
+            </a>
+            <a class="game" href="games/ultra-shot.html" onclick="openGame('games/ultra-shot.html'); return false;">
+                <img src="assets/images/ultra-shot.webp" alt="Ultra Shot Game">
+                <h3>Ultra Shot</h3>
+            </a>
+            <a class="game" href="games/road-rider.html" onclick="openGame('games/road-rider.html'); return false;">
+                <img src="assets/images/road-rider-logo.png" alt="Road Rider Racing Game">
+                <h3>Road Rider</h3>
+            </a>
         </div>
+    </section>
 
-        <div class="game" onclick="openGame('sudoku.html')">
-            <img src="sudoku.jpg" alt="Sudoku Game">
-            <h3>Sudoku</h3>
-        </div>
+    <section id="contact">
+        <h2>Contact GamesHubX</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Message"></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+</main>
 
-        <div class="game" onclick="openGame('chess.html')">
-            <img src="chess.png" alt="Chess Game">
-            <h3>Chess</h3>
-        </div>
-
-        <div class="game" onclick="openGame('numbermergegame.html')">
-            <img src="number merge.webp" alt="Number Merge Game">
-            <h3>Number Merge</h3>
-        </div>
-
-        <div class="game" onclick="openGame('pingpong.html')">
-            <img src="ping pong.webp" alt="Ping Pong Game">
-            <h3>Ping Pong</h3>
-        </div>
-
-        <div class="game" onclick="openGame('Cube_Minion_Rush.html')">
-            <img src="Cube Minion Rush.jpg" alt="Cube Minion Rush Game">
-            <h3>Cube Minion Rush</h3>
-        </div>
-
-        <div class="game" onclick="openGame('ninja_toy_match.html')">
-            <img src="ninja_toy_match.jpg" alt="Ninja Toy Match Game">
-            <h3>Ninja Toy Match</h3>
-        </div>
-
-        <div class="game" onclick="openGame('Bike_Rush_Xtreme.html')">
-            <img src="Bike_Rush_Xtreme.jpg" alt="Bike Rush Xtreme Game">
-            <h3>Bike Rush Xtreme</h3>
-        </div>
-
-        <div class="game" onclick="openGame('Toxic_Arena_Biological_Threat.html')">
-            <img src="Toxic Arena Biological Threat.jpg" alt="Toxic Arena Game">
-            <h3>Toxic Arena</h3>
-        </div>
-
-        <div class="game" onclick="openGame('Ultra_Shot.html')">
-            <img src="Ultra_Shot.webp" alt="Ultra Shot Game">
-            <h3>Ultra Shot</h3>
-        </div>
-
-        <!-- 🔥 ROAD RIDER FIX -->
-        <div class="game" onclick="openGame('/Road_Rider/Road_Rider.html')">
-            <img src="Road_Riderlogo.png" alt="Road Rider Racing Game">
-            <h3>Road Rider</h3>
-        </div>
-
-    </div>
-</section>
-
-<!-- 🔥 FIXED POPUP -->
 <div id="game-container">
     <button onclick="closeGame()" class="close-btn">X</button>
-
     <div class="game-box">
-        <iframe 
-            id="game-frame"
-            allow="autoplay; fullscreen"
-            allowfullscreen>
-        </iframe>
+        <iframe id="game-frame" allow="autoplay; fullscreen" allowfullscreen></iframe>
     </div>
 </div>
 
-<section id="contact">
-    <h2>Contact GamesHubX</h2>
-    <form>
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea placeholder="Message"></textarea>
-        <button type="submit">Send</button>
-    </form>
-</section>
-
 <footer>
-    <p>© 2026 GamesHubX</p>
+    <p>&copy; 2026 GamesHubX</p>
 </footer>
 
-<script src="home.js"></script>
-
+<script src="assets/js/home.js"></script>
 </body>
 </html>

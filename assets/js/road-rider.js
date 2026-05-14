@@ -3,7 +3,7 @@ const startScreen = document.querySelector(".start__menu");
 const gameArea = document.querySelector(".gamearea");
 
 let player = { speed: 5, score: 0 };
-let gameAudio = new Audio("audio/game-audio.mp3");
+let gameAudio = new Audio("../assets/audio/road-rider/game-audio.mp3");
 gameAudio.loop = true;
 
 // 🔥 DIFFICULTY
@@ -70,7 +70,7 @@ function startGame() {
         enemy.y = ((x + 1) * 300) * -1;
         enemy.style.top = enemy.y + "px";
         enemy.style.left = Math.floor(Math.random() * 350) + "px";
-        enemy.style.backgroundImage = `url("image/enemy${Math.floor(Math.random() * 5) + 1}.png")`;
+        enemy.style.backgroundImage = `url("../assets/images/road-rider/enemy${Math.floor(Math.random() * 5) + 1}.png")`;
         gameArea.appendChild(enemy);
     }
 }

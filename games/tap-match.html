@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tap Match Game</title>
+    <title>Play Tap Match Game Online Free | GamesHubX</title>
+    <meta name="description" content="Play Tap Match online for free and find matching pairs in this browser memory game.">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,8 +66,27 @@
             background-color: #c0392b;
         }
     </style>
+    <link rel="stylesheet" href="../assets/css/game-pages.css">
 </head>
 <body>
+<nav class="site-nav" aria-label="Game navigation">
+    <a href="../index.html">Home</a>
+    <a href="snake-game.html">Snake</a>
+    <a href="tic-tac-toe.html">Tic-Tac-Toe</a>
+    <a href="number-merge-game.html">Number Merge</a>
+    <a href="sudoku.html">Sudoku</a>
+    <a href="chess.html">Chess</a>
+    <a href="ping-pong.html">Ping Pong</a>
+    <a href="tap-match.html">Tap Match</a>
+    <a href="word-finder.html">Word Finder</a>
+    <a href="racing-game.html">Racing</a>
+    <a href="cube-minion-rush.html">Cube Minion Rush</a>
+    <a href="ninja-toy-match.html">Ninja Toy Match</a>
+    <a href="bike-rush-xtreme.html">Bike Rush Xtreme</a>
+    <a href="toxic-arena-biological-threat.html">Toxic Arena</a>
+    <a href="ultra-shot.html">Ultra Shot</a>
+    <a href="road-rider.html">Road Rider</a>
+</nav>
     <h1>Tap Match Game</h1>
     <div id="game-board"></div>
     <div class="status" id="status">Find all the pairs!</div>
@@ -74,7 +94,7 @@
     <script>
         const gameBoard = document.getElementById('game-board');
         const statusEl = document.getElementById('status');
-        const icons = ['🍎', '🍌', '🍇', '🍉', '🍓', '🍒', '🍍', '🥝'];
+        const icons = ['ðŸŽ', 'ðŸŒ', 'ðŸ‡', 'ðŸ‰', 'ðŸ“', 'ðŸ’', 'ðŸ', 'ðŸ¥'];
         let cards = [...icons, ...icons]; // Create pairs
         let flippedCards = [];
         let matchedCount = 0;
@@ -129,7 +149,7 @@
                 matchedCount += 2;
 
                 if (matchedCount === cards.length) {
-                    statusEl.textContent = 'You found all the pairs! 🎉';
+                    statusEl.textContent = 'You found all the pairs! ðŸŽ‰';
                 }
             } else {
                 setTimeout(() => {
@@ -151,3 +171,5 @@
     </script>
 </body>
 </html>
+
+
